@@ -1,0 +1,617 @@
+<!-- Baseline Design System — living reference. Mirrors the Figma file structure. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baseline — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- PRIMITIVES ---- */
+  --neutral-0:#FFFFFF; --neutral-50:#F7F8FA; --neutral-100:#EEF0F4; --neutral-200:#E1E5EC;
+  --neutral-300:#CBD2DC; --neutral-400:#98A2B3; --neutral-500:#667085; --neutral-600:#4B5565;
+  --neutral-700:#344054; --neutral-800:#1D2536; --neutral-900:#121722; --neutral-950:#0A0D14;
+  --iris-50:#EEEEFF; --iris-100:#E0E1FF; --iris-200:#C6C7FF; --iris-300:#A5A6FB; --iris-400:#8081F2;
+  --iris-500:#6366E4; --iris-600:#4F52D6; --iris-700:#3E40B0; --iris-800:#31338A; --iris-900:#282A6B;
+  --green-50:#ECFDF3; --green-200:#ABEFC6; --green-600:#079455; --green-700:#067647;
+  --amber-50:#FFFAEB; --amber-200:#FEDF89; --amber-600:#DC6803; --amber-700:#B54708;
+  --red-50:#FEF3F2; --red-200:#FECDCA; --red-600:#D92D20; --red-700:#B42318;
+  --blue-50:#EFF8FF; --blue-200:#B2DDFF; --blue-600:#1570EF; --blue-700:#175CD3;
+
+  /* ---- SEMANTIC ---- */
+  --bg-canvas:var(--neutral-50); --bg-surface:var(--neutral-0); --bg-subtle:var(--neutral-100);
+  --bg-muted:var(--neutral-200); --bg-inverse:var(--neutral-900);
+  --text-primary:var(--neutral-900); --text-secondary:var(--neutral-600); --text-tertiary:var(--neutral-500);
+  --text-disabled:var(--neutral-400); --text-inverse:var(--neutral-0); --text-link:var(--iris-600);
+  --border-subtle:var(--neutral-200); --border-default:var(--neutral-300); --border-strong:var(--neutral-400);
+  --border-focus:var(--iris-500);
+  --action-primary:var(--iris-600); --action-primary-hover:var(--iris-700); --action-primary-active:var(--iris-800);
+  --action-primary-fg:var(--neutral-0); --action-primary-subtle:var(--iris-50);
+  --success-fg:var(--green-700); --success-bg:var(--green-50); --success-border:var(--green-200); --success-solid:var(--green-600);
+  --warning-fg:var(--amber-700); --warning-bg:var(--amber-50); --warning-border:var(--amber-200); --warning-solid:var(--amber-600);
+  --danger-fg:var(--red-700); --danger-bg:var(--red-50); --danger-border:var(--red-200); --danger-solid:var(--red-600);
+  --info-fg:var(--blue-700); --info-bg:var(--blue-50); --info-border:var(--blue-200); --info-solid:var(--blue-600);
+
+  --elev-1:0 1px 2px rgba(10,13,20,.06),0 1px 3px rgba(10,13,20,.10);
+  --elev-2:0 4px 8px -2px rgba(10,13,20,.10),0 2px 4px -2px rgba(10,13,20,.06);
+  --elev-3:0 12px 24px -6px rgba(10,13,20,.12),0 4px 8px -4px rgba(10,13,20,.08);
+  --elev-4:0 24px 48px -12px rgba(10,13,20,.18);
+
+  --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-full:9999px;
+  --font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--font-sans);background:var(--bg-canvas);color:var(--text-primary);
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* ---------- layout ---------- */
+.masthead{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border-subtle);padding:14px clamp(16px,4vw,48px);display:flex;
+  align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:30px;height:30px;border-radius:var(--radius-md);background:var(--action-primary);position:relative;flex:none}
+.mark::before{content:"";position:absolute;inset:8px 8px auto 8px;height:3px;border-radius:2px;background:#fff}
+.mark::after{content:"";position:absolute;left:8px;right:14px;top:15px;height:3px;border-radius:2px;background:rgba(255,255,255,.65)}
+.brand h1{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.brand span{font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary);
+  border:1px solid var(--border-subtle);padding:2px 6px;border-radius:var(--radius-full)}
+.masthead nav{display:flex;gap:4px;flex-wrap:wrap}
+.masthead nav a{font-size:13px;font-weight:500;color:var(--text-secondary);text-decoration:none;
+  padding:6px 10px;border-radius:var(--radius-sm)}
+.masthead nav a:hover{background:var(--bg-subtle);color:var(--text-primary)}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.hero{padding:72px 0 40px}
+.eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--action-primary);margin-bottom:14px}
+.hero h2{font-size:clamp(32px,5vw,44px);line-height:1.1;font-weight:700;letter-spacing:-.02em;max-width:16ch}
+.hero p{font-size:18px;line-height:1.6;color:var(--text-secondary);max-width:60ch;margin-top:18px}
+.hero .facts{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap}
+.hero .facts div{border-left:2px solid var(--action-primary);padding-left:14px}
+.hero .facts b{display:block;font-size:24px;font-weight:700;letter-spacing:-.01em}
+.hero .facts small{font-size:13px;color:var(--text-tertiary)}
+
+section.block{padding:48px 0;border-top:1px solid var(--border-subtle)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-num{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary)}
+.sec-head h3{font-size:24px;font-weight:600;letter-spacing:-.01em}
+.sec-intro{color:var(--text-secondary);max-width:64ch;margin-bottom:28px;font-size:15px}
+.subhead{font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;
+  color:var(--text-tertiary);margin:28px 0 14px}
+
+/* ---------- type specimens ---------- */
+.type-row{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:baseline;
+  padding:14px 0;border-bottom:1px solid var(--border-subtle)}
+.type-row .meta{font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);line-height:1.6}
+.type-row .meta b{color:var(--text-secondary);font-weight:500}
+.t-display{font-size:44px;line-height:1.09;font-weight:700;letter-spacing:-.02em}
+.t-h1{font-size:32px;line-height:1.25;font-weight:700;letter-spacing:-.01em}
+.t-h2{font-size:24px;line-height:1.33;font-weight:600;letter-spacing:-.01em}
+.t-h3{font-size:20px;line-height:1.4;font-weight:600}
+.t-h4{font-size:16px;line-height:1.5;font-weight:600}
+.t-body-lg{font-size:18px;line-height:1.56;font-weight:400}
+.t-body{font-size:16px;line-height:1.5;font-weight:400}
+.t-body-sm{font-size:14px;line-height:1.43;font-weight:400}
+.t-label{font-size:13px;line-height:1.23;font-weight:500;letter-spacing:.01em}
+.t-caption{font-size:12px;line-height:1.33;font-weight:400;color:var(--text-secondary)}
+.t-overline{font-size:11px;line-height:1.45;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- token / colour chips ---------- */
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.gramp{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:2px}
+.swatch{border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-subtle);background:var(--bg-surface)}
+.swatch .cap{height:56px}
+.swatch .lab{padding:8px 10px;font-family:var(--font-mono);font-size:11px;line-height:1.5}
+.swatch .lab b{display:block;color:var(--text-primary);font-weight:500}
+.swatch .lab span{color:var(--text-tertiary)}
+.ramp span{display:block}
+.ramp .cell{height:44px;position:relative}
+.ramp .cell code{position:absolute;left:6px;bottom:4px;font-family:var(--font-mono);font-size:10px;
+  color:rgba(255,255,255,.9);mix-blend-mode:difference}
+
+.tok{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 14px;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--bg-surface)}
+.tok .dot{width:34px;height:34px;border-radius:var(--radius-sm);border:1px solid rgba(10,13,20,.08)}
+.tok .name{font-family:var(--font-mono);font-size:12px;font-weight:500}
+.tok .name em{font-style:normal;color:var(--text-tertiary)}
+.tok .use{font-size:12px;color:var(--text-secondary);margin-top:2px;font-family:var(--font-sans);grid-column:2}
+.tok .res{font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary);text-align:right;white-space:nowrap}
+.tok .res b{color:var(--text-secondary);font-weight:500}
+
+/* ---------- spacing / radius / elevation ---------- */
+.space-row{display:flex;align-items:center;gap:16px;padding:8px 0}
+.space-row .bar{background:var(--action-primary-subtle);border:1px solid var(--iris-200);height:20px;border-radius:2px}
+.space-row code{font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);width:130px;flex:none}
+.space-row small{color:var(--text-tertiary);font-size:12px}
+.radius-demo,.elev-demo{display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+.radius-demo .box{width:100%;height:80px;background:var(--action-primary-subtle);border:1px solid var(--iris-200)}
+.elev-demo .box{width:100%;height:80px;background:var(--bg-surface);border-radius:var(--radius-md)}
+.radius-demo code,.elev-demo code{font-family:var(--font-mono);font-size:12px;color:var(--text-secondary)}
+.radius-demo small,.elev-demo small{font-size:11px;color:var(--text-tertiary);max-width:22ch}
+
+/* ---------- component gallery ---------- */
+.demo{border:1px solid var(--border-subtle);border-radius:var(--radius-lg);background:var(--bg-surface);
+  overflow:hidden;margin-bottom:20px}
+.demo .bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;
+  border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle)}
+.demo .bar h4{font-size:15px;font-weight:600}
+.demo .bar code{font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
+.demo .stage{padding:24px 16px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.demo .stage.col{flex-direction:column;align-items:stretch}
+.matrix{width:100%;border-collapse:collapse}
+.matrix th,.matrix td{padding:12px;text-align:left;border-bottom:1px solid var(--border-subtle);vertical-align:middle}
+.matrix th{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-tertiary)}
+.matrix td:first-child{font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);white-space:nowrap}
+
+/* ---------- BUTTON component ---------- */
+.btn{font-family:var(--font-sans);font-size:14px;font-weight:600;line-height:1;height:40px;
+  padding:0 16px;border-radius:var(--radius-sm);border:1px solid transparent;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;transition:background .12s,border-color .12s,box-shadow .12s}
+.btn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--iris-200);border-color:var(--border-focus)}
+.btn--primary{background:var(--action-primary);color:var(--action-primary-fg)}
+.btn--primary:hover{background:var(--action-primary-hover)}
+.btn--primary:active{background:var(--action-primary-active)}
+.btn--secondary{background:var(--bg-surface);color:var(--text-primary);border-color:var(--border-default)}
+.btn--secondary:hover{background:var(--bg-subtle);border-color:var(--border-strong)}
+.btn--ghost{background:transparent;color:var(--action-primary)}
+.btn--ghost:hover{background:var(--action-primary-subtle)}
+.btn--danger{background:var(--danger-solid);color:#fff}
+.btn--danger:hover{background:var(--red-700)}
+.btn[disabled]{background:var(--bg-muted);color:var(--text-disabled);border-color:transparent;cursor:not-allowed;box-shadow:none}
+.btn--secondary[disabled]{background:var(--bg-surface);border-color:var(--border-subtle);color:var(--text-disabled)}
+.btn--sm{height:32px;font-size:13px;padding:0 12px}
+.btn--lg{height:48px;font-size:15px;padding:0 20px}
+.btn .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;
+  border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- INPUT component ---------- */
+.field{display:flex;flex-direction:column;gap:6px;max-width:320px}
+.field label{font-size:13px;font-weight:500}
+.field .req{color:var(--danger-solid)}
+.input{height:40px;padding:0 12px;border:1px solid var(--border-default);border-radius:var(--radius-sm);
+  font-family:var(--font-sans);font-size:14px;color:var(--text-primary);background:var(--bg-surface);width:100%}
+.input::placeholder{color:var(--text-tertiary)}
+.input:hover{border-color:var(--border-strong)}
+.input:focus{outline:none;border-color:var(--border-focus);box-shadow:0 0 0 3px var(--iris-200)}
+.input[disabled]{background:var(--bg-subtle);color:var(--text-disabled);cursor:not-allowed}
+.input--error{border-color:var(--danger-solid)}
+.input--error:focus{box-shadow:0 0 0 3px var(--red-200)}
+.field .hint{font-size:12px;color:var(--text-tertiary)}
+.field .err{font-size:12px;color:var(--danger-fg)}
+
+/* ---------- SELECT ---------- */
+.select{position:relative;max-width:320px}
+.select select{appearance:none;width:100%;height:40px;padding:0 36px 0 12px;border:1px solid var(--border-default);
+  border-radius:var(--radius-sm);font-family:var(--font-sans);font-size:14px;background:var(--bg-surface);color:var(--text-primary)}
+.select select:focus{outline:none;border-color:var(--border-focus);box-shadow:0 0 0 3px var(--iris-200)}
+.select::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--text-tertiary);
+  border-bottom:2px solid var(--text-tertiary);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+
+/* ---------- CHECKBOX / RADIO ---------- */
+.check{display:inline-flex;gap:10px;align-items:center;font-size:14px;cursor:pointer}
+.check input{appearance:none;width:18px;height:18px;border:1.5px solid var(--border-default);
+  border-radius:var(--radius-sm);position:relative;cursor:pointer;flex:none;background:var(--bg-surface)}
+.check input:checked{background:var(--action-primary);border-color:var(--action-primary)}
+.check input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+  border:2px solid #fff;border-top:0;border-left:0;transform:rotate(45deg)}
+.check input:focus-visible{outline:none;box-shadow:0 0 0 3px var(--iris-200)}
+.check input[disabled]{background:var(--bg-muted);border-color:var(--border-subtle);cursor:not-allowed}
+
+/* ---------- TOGGLE ---------- */
+.toggle{display:inline-flex;gap:10px;align-items:center;font-size:14px;cursor:pointer}
+.toggle input{appearance:none;width:40px;height:22px;border-radius:var(--radius-full);
+  background:var(--bg-muted);position:relative;cursor:pointer;transition:background .15s;flex:none}
+.toggle input::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;
+  background:#fff;box-shadow:var(--elev-1);transition:left .15s}
+.toggle input:checked{background:var(--action-primary)}
+.toggle input:checked::after{left:20px}
+.toggle input:focus-visible{outline:none;box-shadow:0 0 0 3px var(--iris-200)}
+.toggle input[disabled]{opacity:.5;cursor:not-allowed}
+
+/* ---------- BADGE ---------- */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;line-height:1;
+  padding:4px 10px;border-radius:var(--radius-full);border:1px solid transparent}
+.badge .d{width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge--neutral{background:var(--bg-subtle);color:var(--text-secondary);border-color:var(--border-subtle)}
+.badge--success{background:var(--success-bg);color:var(--success-fg);border-color:var(--success-border)}
+.badge--warning{background:var(--warning-bg);color:var(--warning-fg);border-color:var(--warning-border)}
+.badge--danger{background:var(--danger-bg);color:var(--danger-fg);border-color:var(--danger-border)}
+.badge--info{background:var(--info-bg);color:var(--info-fg);border-color:var(--info-border)}
+
+/* ---------- ALERT ---------- */
+.alert{display:flex;gap:12px;padding:14px 16px;border-radius:var(--radius-md);border:1px solid;width:100%}
+.alert .ic{width:20px;height:20px;border-radius:50%;flex:none;color:#fff;display:grid;place-items:center;
+  font-size:12px;font-weight:700}
+.alert h5{font-size:14px;font-weight:600;margin-bottom:2px}
+.alert p{font-size:13px;line-height:1.5}
+.alert--success{background:var(--success-bg);border-color:var(--success-border);color:var(--success-fg)}
+.alert--success .ic{background:var(--success-solid)}
+.alert--warning{background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-fg)}
+.alert--warning .ic{background:var(--warning-solid)}
+.alert--danger{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-fg)}
+.alert--danger .ic{background:var(--danger-solid)}
+.alert--info{background:var(--info-bg);border-color:var(--info-border);color:var(--info-fg)}
+.alert--info .ic{background:var(--info-solid)}
+.alert p{color:var(--text-secondary)}
+
+/* ---------- CARD ---------- */
+.card{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);
+  box-shadow:var(--elev-1);overflow:hidden;width:300px;transition:box-shadow .15s,transform .15s}
+.card.interactive{cursor:pointer}
+.card.interactive:hover{box-shadow:var(--elev-2);transform:translateY(-2px)}
+.card .thumb{height:120px;background:linear-gradient(135deg,var(--iris-400),var(--iris-700))}
+.card .body{padding:16px}
+.card .body .badge{margin-bottom:10px}
+.card .body h4{font-size:16px;font-weight:600;margin-bottom:6px}
+.card .body p{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:14px}
+.card .foot{display:flex;gap:8px}
+
+/* ---------- TABS ---------- */
+.tabs .list{display:flex;gap:4px;border-bottom:1px solid var(--border-subtle)}
+.tabs .tab{background:none;border:0;font-family:var(--font-sans);font-size:14px;font-weight:500;
+  color:var(--text-secondary);padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs .tab:hover{color:var(--text-primary)}
+.tabs .tab[aria-selected="true"]{color:var(--action-primary);border-bottom-color:var(--action-primary)}
+.tabs .tab:focus-visible{outline:none;box-shadow:0 0 0 3px var(--iris-200);border-radius:var(--radius-sm)}
+.tabs .panel{padding:18px 4px;font-size:14px;color:var(--text-secondary)}
+.tabs .panel[hidden]{display:none}
+
+/* ---------- MODAL ---------- */
+.scrim{position:fixed;inset:0;background:rgba(10,13,20,.5);display:none;place-items:center;z-index:60;padding:16px}
+.scrim.open{display:grid}
+.modal{background:var(--bg-surface);border-radius:var(--radius-lg);box-shadow:var(--elev-3);
+  width:min(440px,100%);overflow:hidden}
+.modal .head{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:start}
+.modal .head h4{font-size:18px;font-weight:600}
+.modal .head button{background:none;border:0;font-size:22px;line-height:1;color:var(--text-tertiary);cursor:pointer;padding:2px 6px;border-radius:var(--radius-sm)}
+.modal .head button:hover{background:var(--bg-subtle);color:var(--text-primary)}
+.modal .body{padding:12px 20px 20px;font-size:14px;color:var(--text-secondary);line-height:1.5}
+.modal .foot{padding:16px 20px;background:var(--bg-subtle);display:flex;justify-content:flex-end;gap:10px}
+
+/* ---------- usage callouts ---------- */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.rule{border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:14px 16px;background:var(--bg-surface)}
+.rule .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;display:inline-block;margin-bottom:6px}
+.rule.do .tag{color:var(--success-fg)}
+.rule.dont .tag{color:var(--danger-fg)}
+.rule p{font-size:13px;color:var(--text-secondary);line-height:1.5}
+
+footer{padding:48px 0 72px;border-top:1px solid var(--border-subtle);color:var(--text-tertiary);font-size:13px}
+footer b{color:var(--text-secondary)}
+
+@media (max-width:720px){
+  .type-row{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .masthead nav{display:none}
+  .t-display{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+</style>
+
+<header class="masthead">
+  <div class="brand">
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Baseline</h1><span>v1.0.0</span>
+  </div>
+  <nav aria-label="Sections">
+    <a href="#type">Type</a><a href="#color">Colour</a><a href="#space">Spacing</a>
+    <a href="#radius">Radius</a><a href="#elevation">Elevation</a><a href="#components">Components</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Shared design system · 4 designers · 6 developers</div>
+    <h2>One baseline. Every client. No reinvented buttons.</h2>
+    <p>Baseline is the agency's shared foundation. Every value below is a token — a named decision made once and reused everywhere. Designers pull them from Figma libraries; developers pull the same names from code. This page is the living spec that both sides read from.</p>
+    <div class="facts">
+      <div><b>2-tier</b><small>primitive → semantic tokens</small></div>
+      <div><b>10</b><small>components, fully stated</small></div>
+      <div><b>1</b><small>source of truth</small></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ TYPE ============ -->
+<section class="block" id="type">
+  <div class="sec-head"><span class="sec-num">01</span><h3>Type scale</h3></div>
+  <p class="sec-intro">A modular scale on a 16px base. Every step has a fixed size, line-height, weight and tracking — designers don't invent sizes, they pick a role. Body faces set in Inter; a client's brand display face is swapped only at the <code>display</code>/<code>h1</code> steps via a single token override.</p>
+
+  <div class="type-row"><div class="t-display">Ship the work</div><div class="meta"><b>display</b><br>44 / 48 · 700 · -0.02em<br><b>Use:</b> hero & empty-state headlines only</div></div>
+  <div class="type-row"><div class="t-h1">Page title</div><div class="meta"><b>h1</b><br>32 / 40 · 700 · -0.01em<br><b>Use:</b> one per screen, top of page</div></div>
+  <div class="type-row"><div class="t-h2">Section header</div><div class="meta"><b>h2</b><br>24 / 32 · 600 · -0.01em<br><b>Use:</b> major sections</div></div>
+  <div class="type-row"><div class="t-h3">Card & sub-section title</div><div class="meta"><b>h3</b><br>20 / 28 · 600<br><b>Use:</b> card titles, subsections</div></div>
+  <div class="type-row"><div class="t-h4">Dense group label</div><div class="meta"><b>h4</b><br>16 / 24 · 600<br><b>Use:</b> list/table group heads</div></div>
+  <div class="type-row"><div class="t-body-lg">Lead paragraph for intros and short standout copy.</div><div class="meta"><b>body-lg</b><br>18 / 28 · 400<br><b>Use:</b> lead paragraphs</div></div>
+  <div class="type-row"><div class="t-body">Default reading text and form values. The workhorse size.</div><div class="meta"><b>body</b><br>16 / 24 · 400<br><b>Use:</b> default text, inputs</div></div>
+  <div class="type-row"><div class="t-body-sm">Secondary text, table cells and helper text.</div><div class="meta"><b>body-sm</b><br>14 / 20 · 400<br><b>Use:</b> tables, secondary copy</div></div>
+  <div class="type-row"><div class="t-label">Form label / button text</div><div class="meta"><b>label</b><br>13 / 16 · 500 · 0.01em<br><b>Use:</b> labels, controls</div></div>
+  <div class="type-row"><div class="t-caption">Caption, metadata, timestamps</div><div class="meta"><b>caption</b><br>12 / 16 · 400<br><b>Use:</b> captions, metadata</div></div>
+  <div class="type-row"><div class="t-overline">Category eyebrow</div><div class="meta"><b>overline</b><br>11 / 16 · 600 · 0.08em · UPPER<br><b>Use:</b> eyebrows, section tags</div></div>
+
+  <div class="rules">
+    <div class="rule do"><span class="tag">Rule</span><p>Pick the role that matches the content's job, not the size you want. Need it smaller? That's a different role, not a custom size.</p></div>
+    <div class="rule dont"><span class="tag">Never</span><p>No ad-hoc font sizes, no bold applied to <code>body</code> to fake a heading. Off-scale text is the first sign a project drifted.</p></div>
+  </div>
+</section>
+
+<!-- ============ COLOUR ============ -->
+<section class="block" id="color">
+  <div class="sec-head"><span class="sec-num">02</span><h3>Colour system</h3></div>
+  <p class="sec-intro">Two tiers. <b>Primitives</b> are the raw palette — numbered, meaningless on their own, never referenced by a component. <b>Semantic tokens</b> carry intent (<code>text-primary</code>, <code>border-focus</code>) and resolve to a primitive. Product code and Figma components reference the semantic layer <em>only</em>. This is what lets us reskin a whole client project by remapping tokens, not editing components.</p>
+
+  <div class="subhead">Primitive ramps</div>
+  <div class="grid gramp ramp">
+    <span class="swatch"><span class="cell" style="background:var(--neutral-50)"><code>50</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-100)"><code>100</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-200)"><code>200</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-300)"><code>300</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-400)"><code>400</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-500)"><code>500</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-600)"><code>600</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-700)"><code>700</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-800)"><code>800</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--neutral-900)"><code>900</code></span></span>
+  </div>
+  <div style="height:6px"></div>
+  <div class="grid gramp ramp">
+    <span class="swatch"><span class="cell" style="background:var(--iris-50)"><code>50</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-100)"><code>100</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-200)"><code>200</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-300)"><code>300</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-400)"><code>400</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-500)"><code>500</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-600)"><code>600</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-700)"><code>700</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-800)"><code>800</code></span></span>
+    <span class="swatch"><span class="cell" style="background:var(--iris-900)"><code>900</code></span></span>
+  </div>
+
+  <div class="subhead">Semantic tokens (resolution shown →)</div>
+  <div class="grid g2">
+    <div class="tok"><span class="dot" style="background:var(--text-primary)"></span><div><div class="name">text-primary</div><div class="use">Body & headings · 15.9:1</div></div><div class="res">→ <b>neutral-900</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--text-secondary)"></span><div><div class="name">text-secondary</div><div class="use">Supporting text · 7.1:1</div></div><div class="res">→ <b>neutral-600</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--text-tertiary)"></span><div><div class="name">text-tertiary</div><div class="use">Meta & placeholders · 4.8:1</div></div><div class="res">→ <b>neutral-500</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--action-primary)"></span><div><div class="name">action-primary</div><div class="use">The one primary action</div></div><div class="res">→ <b>iris-600</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--border-default)"></span><div><div class="name">border-default</div><div class="use">Resting control borders</div></div><div class="res">→ <b>neutral-300</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--border-focus)"></span><div><div class="name">border-focus</div><div class="use">Focus ring · never removed</div></div><div class="res">→ <b>iris-500</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--bg-surface)"></span><div><div class="name">bg-surface</div><div class="use">Cards, panels, inputs</div></div><div class="res">→ <b>neutral-0</b></div></div>
+    <div class="tok"><span class="dot" style="background:var(--bg-canvas)"></span><div><div class="name">bg-canvas</div><div class="use">The page behind surfaces</div></div><div class="res">→ <b>neutral-50</b></div></div>
+  </div>
+
+  <div class="subhead">Feedback families — each ships fg / bg / border / solid</div>
+  <div class="grid g3">
+    <div class="tok"><span class="dot" style="background:var(--success-solid)"></span><div><div class="name">feedback-success</div><div class="use">Confirmation, completed</div></div></div>
+    <div class="tok"><span class="dot" style="background:var(--warning-solid)"></span><div><div class="name">feedback-warning</div><div class="use">Caution, needs attention</div></div></div>
+    <div class="tok"><span class="dot" style="background:var(--danger-solid)"></span><div><div class="name">feedback-danger</div><div class="use">Errors, destructive acts</div></div></div>
+    <div class="tok"><span class="dot" style="background:var(--info-solid)"></span><div><div class="name">feedback-info</div><div class="use">Neutral information</div></div></div>
+  </div>
+
+  <div class="rules">
+    <div class="rule do"><span class="tag">Rule</span><p>Reference semantic tokens in every component. A client rebrand = remap <code>action-primary</code> once; every button follows.</p></div>
+    <div class="rule dont"><span class="tag">Never</span><p>Never hard-code a hex or reference a primitive (<code>iris-600</code>) inside a component. Primitives change; intent shouldn't.</p></div>
+  </div>
+</section>
+
+<!-- ============ SPACING ============ -->
+<section class="block" id="space">
+  <div class="sec-head"><span class="sec-num">03</span><h3>Spacing</h3></div>
+  <p class="sec-intro">A single 4px grid. Every gap, pad and margin is a step on this scale — enforced in Figma through Auto Layout and in code through spacing tokens. No arbitrary pixel nudging.</p>
+  <div>
+    <div class="space-row"><code>space-2 · 4px</code><span class="bar" style="width:4px"></span><small>icon ↔ label, tightest pairing</small></div>
+    <div class="space-row"><code>space-3 · 8px</code><span class="bar" style="width:8px"></span><small>inside a control (input text ↔ edge)</small></div>
+    <div class="space-row"><code>space-4 · 12px</code><span class="bar" style="width:12px"></span><small>button padding, chip padding</small></div>
+    <div class="space-row"><code>space-5 · 16px</code><span class="bar" style="width:16px"></span><small>card padding, form field gap</small></div>
+    <div class="space-row"><code>space-7 · 24px</code><span class="bar" style="width:24px"></span><small>between related components</small></div>
+    <div class="space-row"><code>space-8 · 32px</code><span class="bar" style="width:32px"></span><small>between component groups</small></div>
+    <div class="space-row"><code>space-10 · 48px</code><span class="bar" style="width:48px"></span><small>between page sections</small></div>
+    <div class="space-row"><code>space-11 · 64px</code><span class="bar" style="width:64px"></span><small>page-level rhythm</small></div>
+  </div>
+  <div class="rules">
+    <div class="rule do"><span class="tag">Rule</span><p>Spacing grows with relationship distance: 4–8 inside a component, 16–24 between components, 48+ between sections.</p></div>
+    <div class="rule dont"><span class="tag">Never</span><p>No 5px, 15px, 22px. If a value isn't on the scale, the layout is wrong, not the scale.</p></div>
+  </div>
+</section>
+
+<!-- ============ RADIUS ============ -->
+<section class="block" id="radius">
+  <div class="sec-head"><span class="sec-num">04</span><h3>Radius</h3></div>
+  <p class="sec-intro">Corner radius encodes hierarchy of surface: the larger the surface, the softer the corner. Consistency here is what makes unrelated client projects still feel like they came from the same shop.</p>
+  <div class="grid g3">
+    <div class="radius-demo"><div class="box" style="border-radius:0"></div><code>radius-none · 0</code><small>tables, data cells, full-bleed media</small></div>
+    <div class="radius-demo"><div class="box" style="border-radius:4px"></div><code>radius-sm · 4</code><small>buttons, inputs, badges, chips</small></div>
+    <div class="radius-demo"><div class="box" style="border-radius:8px"></div><code>radius-md · 8</code><small>menus, alerts, small cards</small></div>
+    <div class="radius-demo"><div class="box" style="border-radius:12px"></div><code>radius-lg · 12</code><small>cards, modals, large surfaces</small></div>
+    <div class="radius-demo"><div class="box" style="border-radius:9999px"></div><code>radius-full</code><small>avatars, pills, toggles</small></div>
+  </div>
+</section>
+
+<!-- ============ ELEVATION ============ -->
+<section class="block" id="elevation">
+  <div class="sec-head"><span class="sec-num">05</span><h3>Elevation</h3></div>
+  <p class="sec-intro">Shadow is not decoration — it encodes how close a surface is to the user, i.e. z-order. One level per layer. Skipping levels or mixing them breaks the sense of depth.</p>
+  <div class="grid g3" style="margin-top:8px">
+    <div class="elev-demo"><div class="box" style="box-shadow:none;border:1px solid var(--border-subtle)"></div><code>elevation-0</code><small>flush surfaces, cards on tinted bg</small></div>
+    <div class="elev-demo"><div class="box" style="box-shadow:var(--elev-1)"></div><code>elevation-1</code><small>resting cards, raised panels</small></div>
+    <div class="elev-demo"><div class="box" style="box-shadow:var(--elev-2)"></div><code>elevation-2</code><small>dropdowns, popovers, hover-lift</small></div>
+    <div class="elev-demo"><div class="box" style="box-shadow:var(--elev-3)"></div><code>elevation-3</code><small>modals & dialogs</small></div>
+    <div class="elev-demo"><div class="box" style="box-shadow:var(--elev-4)"></div><code>elevation-4</code><small>full-screen overlays, palette</small></div>
+  </div>
+</section>
+
+<!-- ============ COMPONENTS ============ -->
+<section class="block" id="components">
+  <div class="sec-head"><span class="sec-num">06</span><h3>Components</h3></div>
+  <p class="sec-intro">Ten components, each shown across its variants and every interaction state. In Figma these are single components with variant properties; in code they're one component per file taking props that map 1:1 to those properties. Hover and focus below are live — tab through them.</p>
+
+  <!-- BUTTON -->
+  <div class="demo">
+    <div class="bar"><h4>Button</h4><code>variant · size · state</code></div>
+    <div class="stage col">
+      <table class="matrix"><thead><tr><th>State</th><th>Primary</th><th>Secondary</th><th>Ghost</th><th>Danger</th></tr></thead>
+      <tbody>
+        <tr><td>default</td>
+          <td><button class="btn btn--primary">Save changes</button></td>
+          <td><button class="btn btn--secondary">Cancel</button></td>
+          <td><button class="btn btn--ghost">Skip</button></td>
+          <td><button class="btn btn--danger">Delete</button></td></tr>
+        <tr><td>disabled</td>
+          <td><button class="btn btn--primary" disabled>Save changes</button></td>
+          <td><button class="btn btn--secondary" disabled>Cancel</button></td>
+          <td><button class="btn btn--ghost" disabled>Skip</button></td>
+          <td><button class="btn btn--danger" disabled>Delete</button></td></tr>
+        <tr><td>loading</td>
+          <td><button class="btn btn--primary"><span class="spin"></span>Saving</button></td>
+          <td><button class="btn btn--secondary"><span class="spin" style="border-color:var(--neutral-300);border-top-color:var(--text-secondary)"></span>Loading</button></td>
+          <td colspan="2" style="color:var(--text-tertiary);font-family:var(--font-sans);font-size:13px">Loading state applies to primary/secondary; hover & pressed states are live above.</td></tr>
+      </tbody></table>
+      <div style="display:flex;gap:12px;align-items:center;padding-top:6px">
+        <button class="btn btn--primary btn--sm">Small · 32</button>
+        <button class="btn btn--primary">Medium · 40</button>
+        <button class="btn btn--primary btn--lg">Large · 48</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXT INPUT -->
+  <div class="demo">
+    <div class="bar"><h4>Text input</h4><code>label · hint · error</code></div>
+    <div class="stage">
+      <div class="field"><label>Email <span class="req">*</span></label><input class="input" placeholder="you@agency.com"><span class="hint">Work address preferred.</span></div>
+      <div class="field"><label>Project name</label><input class="input" value="Northwind rebrand"></div>
+      <div class="field"><label>Budget</label><input class="input input--error" value="-500"><span class="err">Budget must be a positive number.</span></div>
+      <div class="field"><label>Client ID</label><input class="input" value="Locked" disabled></div>
+    </div>
+  </div>
+
+  <!-- SELECT + CHECKBOX + RADIO + TOGGLE -->
+  <div class="demo">
+    <div class="bar"><h4>Select · Checkbox · Radio · Toggle</h4><code>form controls</code></div>
+    <div class="stage" style="gap:36px;align-items:flex-start">
+      <div class="field"><label>Stage</label><div class="select"><select><option>Discovery</option><option>Design</option><option>Build</option><option>QA</option></select></div></div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <label class="check"><input type="checkbox" checked> Billable</label>
+        <label class="check"><input type="checkbox"> Internal</label>
+        <label class="check"><input type="checkbox" disabled> Archived</label>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <label class="check"><input type="radio" name="r" style="border-radius:9999px" checked> Fixed price</label>
+        <label class="check"><input type="radio" name="r" style="border-radius:9999px"> Time & materials</label>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <label class="toggle"><input type="checkbox" checked> Notify team</label>
+        <label class="toggle"><input type="checkbox"> Auto-archive</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGE -->
+  <div class="demo">
+    <div class="bar"><h4>Badge</h4><code>status · tone</code></div>
+    <div class="stage">
+      <span class="badge badge--neutral"><span class="d"></span>Draft</span>
+      <span class="badge badge--info"><span class="d"></span>In review</span>
+      <span class="badge badge--warning"><span class="d"></span>Blocked</span>
+      <span class="badge badge--success"><span class="d"></span>Shipped</span>
+      <span class="badge badge--danger"><span class="d"></span>Overdue</span>
+    </div>
+  </div>
+
+  <!-- ALERT -->
+  <div class="demo">
+    <div class="bar"><h4>Alert</h4><code>4 tones · icon + title + body</code></div>
+    <div class="stage col" style="gap:12px">
+      <div class="alert alert--info"><span class="ic">i</span><div><h5>Heads up</h5><p>This project uses the client's brand display face at the h1 step.</p></div></div>
+      <div class="alert alert--success"><span class="ic">✓</span><div><h5>Deploy succeeded</h5><p>Build 214 is live on staging. QA has been notified.</p></div></div>
+      <div class="alert alert--warning"><span class="ic">!</span><div><h5>Approaching budget</h5><p>82% of hours used with two weeks remaining.</p></div></div>
+      <div class="alert alert--danger"><span class="ic">×</span><div><h5>Sync failed</h5><p>Couldn't reach the asset server. Retry, or check the connection settings.</p></div></div>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="demo">
+    <div class="bar"><h4>Card</h4><code>static · interactive (hover me)</code></div>
+    <div class="stage">
+      <div class="card">
+        <div class="thumb"></div>
+        <div class="body"><span class="badge badge--success"><span class="d"></span>Shipped</span>
+          <h4>Northwind rebrand</h4><p>Full identity system and marketing site delivered in six weeks.</p>
+          <div class="foot"><button class="btn btn--primary btn--sm">View</button><button class="btn btn--secondary btn--sm">Duplicate</button></div>
+        </div>
+      </div>
+      <div class="card interactive">
+        <div class="thumb" style="background:linear-gradient(135deg,var(--neutral-400),var(--neutral-700))"></div>
+        <div class="body"><span class="badge badge--info"><span class="d"></span>In review</span>
+          <h4>Harbor app UI</h4><p>Mobile-first product interface built entirely on Baseline tokens.</p>
+          <div class="foot"><button class="btn btn--primary btn--sm">Open</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="demo">
+    <div class="bar"><h4>Tabs</h4><code>selected · keyboard accessible</code></div>
+    <div class="stage col">
+      <div class="tabs" id="tabs">
+        <div class="list" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-i="0">Overview</button>
+          <button class="tab" role="tab" aria-selected="false" data-i="1">Activity</button>
+          <button class="tab" role="tab" aria-selected="false" data-i="2">Files</button>
+        </div>
+        <div class="panel" data-i="0">Project summary, key dates and the assigned team.</div>
+        <div class="panel" data-i="1" hidden>A running feed of comments, status changes and hand-offs.</div>
+        <div class="panel" data-i="2" hidden>Deliverables and shared assets, grouped by milestone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="demo">
+    <div class="bar"><h4>Modal</h4><code>elevation-3 · scrim · focus trap</code></div>
+    <div class="stage"><button class="btn btn--primary" id="openModal">Open modal</button>
+      <span style="color:var(--text-tertiary);font-size:13px">Opens a dialog on a scrim. Esc or the backdrop closes it.</span></div>
+  </div>
+
+</section>
+
+<footer class="wrap">
+  <p>This page is the <b>living reference</b> for Baseline v1.0.0 — the buildable spec that mirrors the Figma library structure exactly (page-per-foundation, one component per variant set). Designers consume it as a Figma team library; developers consume the same tokens from <b>tokens.json</b>. When the two disagree, the token file wins. See the <b>handoff documentation</b> for naming rules and how to read the Figma file.</p>
+</footer>
+</div>
+
+<!-- MODAL markup -->
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="modal">
+    <div class="head"><h4 id="mtitle">Archive this project?</h4><button id="closeModal" aria-label="Close">×</button></div>
+    <div class="body">Archived projects move out of the active list but keep all files and history. You can restore them anytime from the archive.</div>
+    <div class="foot"><button class="btn btn--secondary" id="cancelModal">Cancel</button><button class="btn btn--danger">Archive</button></div>
+  </div>
+</div>
+
+<script>
+// Tabs
+document.querySelectorAll('#tabs .tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const i=tab.dataset.i;
+    document.querySelectorAll('#tabs .tab').forEach(t=>t.setAttribute('aria-selected', t.dataset.i===i));
+    document.querySelectorAll('#tabs .panel').forEach(p=>p.hidden = p.dataset.i!==i);
+  });
+});
+// Modal
+const scrim=document.getElementById('scrim');
+const open=()=>{scrim.classList.add('open');document.getElementById('closeModal').focus();};
+const close=()=>{scrim.classList.remove('open');document.getElementById('openModal').focus();};
+document.getElementById('openModal').addEventListener('click',open);
+document.getElementById('closeModal').addEventListener('click',close);
+document.getElementById('cancelModal').addEventListener('click',close);
+scrim.addEventListener('click',e=>{if(e.target===scrim)close();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&scrim.classList.contains('open'))close();});
+</script>
