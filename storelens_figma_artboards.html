@@ -1,0 +1,392 @@
+<!-- StoreLens — Figma-ready static artboards (all screens visible at once) -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StoreLens — Figma-ready artboards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#FAF9F6;--card:#FFFFFF;--ink:#1C2333;--ink-2:#5B6472;--ink-3:#8A909C;
+    --line:#E7E4DC;--line-2:#EFEDE7;--pine:#2F6F5E;--pine-dark:#255848;--pine-tint:#EAF2EF;
+    --gold:#C8871E;--gold-tint:#FBF2E0;--brick:#C4453C;--brick-tint:#F8ECEA;
+    --radius:14px;--shadow-sm:0 1px 2px rgba(28,35,51,.05);--shadow-md:0 14px 40px -22px rgba(28,35,51,.35);
+    --sans:"Geist",system-ui,sans-serif;--serif:"Fraunces",Georgia,serif;--mono:"Geist Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:#EDEBE5;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5;padding:36px 32px 80px}
+
+  .doc-head{max-width:1360px;margin:0 auto 30px}
+  .doc-head h1{font-family:var(--sans);font-size:16px;font-weight:600;margin:0 0 6px}
+  .doc-head p{font-size:13px;color:var(--ink-2);max-width:70ch;margin:0}
+  .doc-head code{font-family:var(--mono);font-size:12px;background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+
+  /* canvas of artboards */
+  .board{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(2,640px);gap:64px 56px;justify-content:center}
+  @media(max-width:1400px){.board{grid-template-columns:640px}}
+  @media(max-width:720px){.board{grid-template-columns:100%}}
+  .cell{margin:0}
+  figcaption{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#6b6357;margin:0 0 12px;display:flex;gap:10px;align-items:center}
+  figcaption .no{background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:11px}
+  figcaption .tag{border:1px solid #c9c3b6;border-radius:20px;padding:2px 8px;font-size:10px;color:#8a8172}
+  figcaption .tag.fail{border-color:#e0b8b3;color:var(--brick);background:var(--brick-tint)}
+  figcaption .tag.key{border-color:#bcd8cd;color:var(--pine);background:var(--pine-tint)}
+
+  /* an artboard = a real product frame */
+  .frame{width:640px;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-md);overflow:hidden}
+  .appbar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line-2);background:linear-gradient(180deg,#fff,#fdfdfb)}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.01em;font-size:15px}
+  .logo{width:22px;height:22px;border-radius:6px;background:var(--pine);position:relative;flex:0 0 auto}
+  .logo:after{content:"";position:absolute;inset:6px 6px auto auto;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .steps{display:flex;align-items:center;gap:6px}
+  .dot{width:26px;height:4px;border-radius:3px;background:var(--line)}
+  .dot.on{background:var(--pine)}
+  .dot.done{background:var(--pine);opacity:.5}
+  .stage{padding:34px 38px 40px}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pine);font-weight:500;margin-bottom:14px}
+  .eyebrow.mut{color:var(--ink-3)}
+  h2{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.08;letter-spacing:-.015em;margin:0 0 14px}
+  .lede{font-size:15px;color:var(--ink-2);max-width:46ch;margin:0 0 24px}
+
+  .btn{font-family:var(--sans);font-size:15px;font-weight:600;border-radius:11px;padding:13px 20px;border:1px solid transparent;display:inline-block}
+  .btn-primary{background:var(--pine);color:#fff;box-shadow:0 6px 16px -8px rgba(47,111,94,.7)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
+  .link{color:var(--pine);font-weight:500;font-size:14px;border-bottom:1px solid transparent}
+  .link.mut{color:var(--ink-3)}
+  .trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-3)}
+  .trust span{background:#f6f5f1;border:1px solid var(--line-2);padding:5px 9px;border-radius:20px}
+
+  .goals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:4px 0 24px}
+  .goal{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:15px;display:flex;gap:12px;align-items:flex-start}
+  .goal.sel{border-color:var(--pine);background:var(--pine-tint)}
+  .goal .ico{width:30px;height:30px;border-radius:8px;background:var(--pine-tint);color:var(--pine);display:grid;place-items:center;flex:0 0 auto;font-size:15px}
+  .goal.sel .ico{background:var(--pine);color:#fff}
+  .goal b{display:block;font-size:14.5px;font-weight:600;color:var(--ink)}
+  .goal small{font-size:12px;color:var(--ink-2);line-height:1.35}
+
+  .prog{height:8px;background:var(--line-2);border-radius:20px;overflow:hidden;margin:6px 0 22px;max-width:440px}
+  .prog i{display:block;height:100%;width:72%;background:var(--pine);border-radius:20px}
+  .synclist{list-style:none;padding:0;margin:0 0 22px;max-width:440px}
+  .synclist li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:14.5px;color:var(--ink-2)}
+  .synclist .tick{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto}
+  .synclist li.ok .tick{background:var(--pine);border-color:var(--pine);position:relative}
+  .synclist li.ok .tick:after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .synclist li.ok{color:var(--ink)}
+  .teaser{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+
+  .pulse{border:1px solid var(--line);border-radius:18px;padding:26px 28px;background:linear-gradient(180deg,#fff,#fdfcf9);box-shadow:var(--shadow-sm)}
+  .pulse .say{font-family:var(--serif);font-weight:500;font-size:29px;line-height:1.18;letter-spacing:-.01em;margin:6px 0 18px}
+  .hl{background:linear-gradient(180deg,transparent 62%,var(--gold-tint) 62%);padding:0 2px}
+  .down{color:var(--brick);font-weight:600}
+  .spark{display:flex;align-items:center;gap:16px;margin:2px 0 22px;flex-wrap:wrap}
+  .spark .cap{font-size:13.5px;color:var(--ink-2);max-width:32ch}
+  .causes .t{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+  .causes ul{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:10px}
+  .causes li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--ink)}
+  .causes .n{font-family:var(--mono);font-size:12px;color:var(--pine);font-weight:600;background:var(--pine-tint);border-radius:6px;width:22px;height:22px;display:grid;place-items:center;flex:0 0 auto;margin-top:1px}
+
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2px 0 16px}
+  .kpi{border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:#fff}
+  .kpi .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .kpi .num{font-size:26px;font-weight:700;letter-spacing:-.02em;margin-top:6px}
+  .kpi .chg{font-family:var(--mono);font-size:11.5px;margin-top:2px}
+  .kpi .up{color:var(--pine)}.kpi .dn{color:var(--brick)}
+  .fakechart{height:140px;border:1px solid var(--line);border-radius:12px;margin-bottom:14px;padding:12px;background:#fff}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .filters .f{font-family:var(--mono);font-size:11px;color:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fff}
+  .rejnote{background:var(--brick-tint);border:1px solid #ecc9c5;border-radius:12px;padding:14px 16px;font-size:13px;color:#7d2c26;margin-bottom:20px}
+  .rejnote b{color:#5f201c}
+
+  .field{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:14px;background:#fff}
+  .field .lab b{font-size:14.5px;display:block}
+  .field .lab small{font-size:12.5px;color:var(--ink-2)}
+  .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg span{font-size:13px;padding:8px 12px;color:var(--ink-2)}
+  .seg span.on{background:var(--pine);color:#fff}
+  .toggle{width:44px;height:26px;border-radius:20px;background:var(--line);position:relative;flex:0 0 auto}
+  .toggle:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:var(--shadow-sm)}
+  .toggle.on{background:var(--pine)}.toggle.on:after{left:21px}
+  .confirm{background:var(--pine-tint);border:1px solid #cfe3dc;border-radius:12px;padding:16px 18px;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  .confirm .c{width:26px;height:26px;border-radius:50%;background:var(--pine);position:relative;flex:0 0 auto}
+  .confirm .c:after{content:"";position:absolute;left:9px;top:5px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .confirm b{font-size:14.5px}
+
+  .hi{font-size:14px;color:var(--ink-2);margin-bottom:18px}
+  .changes{list-style:none;padding:0;margin:20px 0 24px;border-top:1px solid var(--line-2)}
+  .changes li{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-2)}
+  .changes .name{font-size:14.5px}
+  .changes .val{font-family:var(--mono);font-size:13.5px;font-weight:500}
+  .changes .val.up{color:var(--pine)}.changes .val.dn{color:var(--brick)}
+
+  .dash-q{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 4px}
+  .dash-lead{font-size:14px;color:var(--ink-2);margin-bottom:18px}
+  .grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin-bottom:14px}
+  .panel{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff}
+  .panel .h{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+  .bench{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+  .bench b{color:var(--pine)}
+  .pinned{border:1px solid var(--pine);background:var(--pine-tint)}
+
+  .err-ico{width:46px;height:46px;border-radius:12px;background:var(--brick-tint);color:var(--brick);display:grid;place-items:center;font-size:24px;font-weight:700;margin-bottom:18px}
+
+  /* flow map */
+  .maprow{display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
+  .col{display:flex;flex-direction:column;gap:0}
+  .node{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 13px}
+  .node .lab{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3px}
+  .node .t{font-size:13.5px;font-weight:600;line-height:1.3}
+  .node.dec{border-color:var(--gold);background:var(--gold-tint)}.node.dec .lab{color:var(--gold)}
+  .node.fail{border-color:#ecc9c5;background:var(--brick-tint);font-size:12px}.node.fail .lab{color:var(--brick)}
+  .node.hook{border-color:var(--pine);background:var(--pine-tint)}.node.hook .lab{color:var(--pine)}
+  .arrow{height:20px;width:2px;background:var(--line);margin:0 auto;position:relative}
+  .arrow:after{content:"";position:absolute;bottom:-1px;left:-3px;border:4px solid transparent;border-top-color:var(--line)}
+  .side{display:flex;flex-direction:column;gap:9px;padding-top:2px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px;font-size:12px;color:var(--ink-2)}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+</style>
+
+<div class="doc-head">
+  <h1>StoreLens — onboarding artboards (Figma-ready)</h1>
+  <p>Every screen is rendered at once as its own fixed-width frame, so an HTML→Figma import captures all of them (not just one). Recommended: the <code>html.to.design</code> Figma plugin → "Import from HTML" (upload this file). Each frame below imports as a separate Figma frame; select them and use <em>right-click → Move to page</em> if you want one screen per page. Frame width is a uniform 640&nbsp;px.</p>
+</div>
+
+<div class="board">
+
+  <!-- 00 FLOW MAP -->
+  <figure class="cell">
+    <figcaption><span class="no">00</span> Flow map — decision points &amp; failure paths</figcaption>
+    <div class="frame" aria-label="00 Flow map">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="stage">
+        <div class="eyebrow mut">Overview · flow map</div>
+        <div class="maprow">
+          <div class="col">
+            <div class="node"><div class="lab">Entry</div><div class="t">Connect Shopify store</div></div>
+            <div class="arrow"></div>
+            <div class="node dec"><div class="lab">Decision</div><div class="t">Enough order history?</div></div>
+            <div class="arrow"></div>
+            <div class="node dec"><div class="lab">Reframe · key move</div><div class="t">"What do you want to know?" → pick one goal</div></div>
+            <div class="arrow"></div>
+            <div class="node"><div class="lab">Async</div><div class="t">Build first insight (never blank)</div></div>
+            <div class="arrow"></div>
+            <div class="node hook"><div class="lab">Aha · time-to-value</div><div class="t">The Pulse — one insight + causes</div></div>
+            <div class="arrow"></div>
+            <div class="node hook"><div class="lab">First action</div><div class="t">Turn on weekly pulse → return hook</div></div>
+            <div class="arrow"></div>
+            <div class="node hook"><div class="lab">Return visit</div><div class="t">"Since you were away" digest</div></div>
+          </div>
+          <div class="side">
+            <div class="node fail"><div class="lab">Fail · connect</div>OAuth denied → recovery, retry + help</div>
+            <div class="node fail"><div class="lab">Fail · low data</div>&lt;30 days → starter mode</div>
+            <div class="node fail"><div class="lab">Fail · indecision</div>No pick → default to sales health</div>
+            <div class="node fail"><div class="lab">Fail · slow sync</div>"Email me when ready"</div>
+            <div class="node fail"><div class="lab">Fail · no signal</div>Show steady baseline + hook</div>
+            <div class="node fail"><div class="lab">Fail · skips setup</div>Gentle default digest</div>
+          </div>
+        </div>
+        <div class="legend"><span><i style="background:var(--pine)"></i>Happy path</span><span><i style="background:var(--gold)"></i>Decision</span><span><i style="background:var(--brick)"></i>Failure</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 01 CONNECT -->
+  <figure class="cell">
+    <figcaption><span class="no">01</span> Connect store <span class="tag">Empty / cold start</span></figcaption>
+    <div class="frame" aria-label="01 Connect store">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="stage">
+        <div class="eyebrow">Step 1 of 3 · Connect</div>
+        <h2>Let's connect your shop.</h2>
+        <p class="lede">StoreLens reads your Shopify orders, products, and customers so it can spot what's changing. It's read-only — we never write anything back to your store.</p>
+        <div class="btn-row"><span class="btn btn-primary">Connect Shopify store</span><span class="link">See what we read</span></div>
+        <div class="trust"><span>Read-only access</span><span>Your data stays yours</span><span>Disconnect anytime</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 01b ERROR -->
+  <figure class="cell">
+    <figcaption><span class="no">01b</span> Connection error <span class="tag fail">Failure path</span></figcaption>
+    <div class="frame" aria-label="01b Connection error">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div></div>
+      <div class="stage">
+        <div class="eyebrow" style="color:var(--brick)">Connection · couldn't complete</div>
+        <div class="err-ico">!</div>
+        <h2>We couldn't reach your store.</h2>
+        <p class="lede">Shopify didn't confirm the connection. This is usually temporary — nothing on your store was changed.</p>
+        <div class="btn-row"><span class="btn btn-primary">Try again</span><span class="link">Back</span><span class="link mut">Get help</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 02 GOAL -->
+  <figure class="cell">
+    <figcaption><span class="no">02</span> What do you want to know? <span class="tag key">The reframe</span></figcaption>
+    <div class="frame" aria-label="02 Goal selection">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"><span class="dot done"></span><span class="dot on"></span><span class="dot"></span></div></div>
+      <div class="stage">
+        <div class="eyebrow">Step 2 of 3 · Focus</div>
+        <h2>What do you want to know first?</h2>
+        <p class="lede">Pick one. StoreLens starts here instead of dumping every chart on you — you can change it whenever.</p>
+        <div class="goals">
+          <div class="goal sel"><span class="ico">↺</span><span><b>Are my customers coming back?</b><small>Repeat purchase rate &amp; loyalty</small></span></div>
+          <div class="goal"><span class="ico">◇</span><span><b>Are my sales healthy?</b><small>Revenue trend vs. what's normal</small></span></div>
+          <div class="goal"><span class="ico">▤</span><span><b>Which products should I reorder?</b><small>Bestsellers &amp; stock-outs</small></span></div>
+          <div class="goal"><span class="ico">◈</span><span><b>Is my marketing paying off?</b><small>Where orders actually come from</small></span></div>
+          <div class="goal"><span class="ico">⚠</span><span><b>Where am I losing sales?</b><small>Drop-off &amp; abandoned checkouts</small></span></div>
+          <div class="goal"><span class="ico">?</span><span><b>Not sure yet</b><small>We'll start with sales health</small></span></div>
+        </div>
+        <div class="btn-row"><span class="btn btn-primary">Show me →</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 03 SYNC -->
+  <figure class="cell">
+    <figcaption><span class="no">03</span> Building your insight <span class="tag">Never blank</span></figcaption>
+    <div class="frame" aria-label="03 Sync">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"><span class="dot done"></span><span class="dot done"></span><span class="dot on"></span></div></div>
+      <div class="stage">
+        <div class="eyebrow">Step 3 of 3 · Reading your shop</div>
+        <h2>Reading your last 90 days…</h2>
+        <p class="lede">This takes a few seconds. We're pulling just enough to find your first insight.</p>
+        <div class="prog"><i></i></div>
+        <ul class="synclist">
+          <li class="ok"><span class="tick"></span>Orders</li>
+          <li class="ok"><span class="tick"></span>Products &amp; inventory</li>
+          <li><span class="tick"></span>Customers &amp; repeat purchases</li>
+        </ul>
+        <p class="teaser">Found 1,240 orders and 318 repeat customers.</p>
+        <div class="btn-row" style="margin-top:20px"><span class="link mut">Taking a while? Email me when it's ready →</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 04 PULSE -->
+  <figure class="cell">
+    <figcaption><span class="no">04</span> The Pulse <span class="tag key">Kept · the aha + first action</span></figcaption>
+    <div class="frame" aria-label="04 The Pulse (kept)">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"></div></div>
+      <div class="stage">
+        <div class="eyebrow">Your pulse · customer retention</div>
+        <div class="pulse">
+          <p class="say">Your repeat customers are <span class="hl"><span class="down">slipping — down 12%</span></span> since last month.</p>
+          <div class="spark">
+            <svg width="180" height="52" viewBox="0 0 180 52" fill="none"><polyline points="2,14 24,12 46,18 68,16 90,24 112,28 134,36 158,42 178,44" stroke="#C4453C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="178" cy="44" r="3.5" fill="#C4453C"/></svg>
+            <span class="cap">1 in 5 buyers used to come back within 60 days. Now it's closer to 1 in 6.</span>
+          </div>
+          <div class="causes">
+            <div class="t">Why this might be happening</div>
+            <ul>
+              <li><span class="n">1</span><span>Fewer email campaigns went out in the last 3 weeks.</span></li>
+              <li><span class="n">2</span><span>Your top repeat product, <b>Cedar Candle</b>, has been out of stock 9 days.</span></li>
+              <li><span class="n">3</span><span>First-time buyers from your April sale aren't returning.</span></li>
+            </ul>
+          </div>
+          <div class="btn-row"><span class="btn btn-primary">Watch this each week</span><span class="link">See the full picture</span></div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 04b REJECTED -->
+  <figure class="cell">
+    <figcaption><span class="no">04b</span> KPI dashboard <span class="tag fail">Rejected v1</span></figcaption>
+    <div class="frame" aria-label="04b KPI grid (rejected)">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"></div></div>
+      <div class="stage">
+        <div class="eyebrow" style="color:var(--brick)">Rejected v1 · the KPI dashboard</div>
+        <div class="rejnote"><b>The version I rejected.</b> The exact trap in the brief: numbers with no benchmark, no narrative, nothing to do.</div>
+        <div class="filters"><span class="f">Last 30 days ▾</span><span class="f">All channels ▾</span><span class="f">Compare: prev ▾</span></div>
+        <div class="kpis">
+          <div class="kpi"><div class="lab">Revenue</div><div class="num">$18,420</div><div class="chg dn">▼ 4.2%</div></div>
+          <div class="kpi"><div class="lab">Orders</div><div class="num">1,240</div><div class="chg up">▲ 1.1%</div></div>
+          <div class="kpi"><div class="lab">AOV</div><div class="num">$14.85</div><div class="chg dn">▼ 5.0%</div></div>
+          <div class="kpi"><div class="lab">Conv. rate</div><div class="num">2.1%</div><div class="chg dn">▼ 0.3pt</div></div>
+        </div>
+        <div class="fakechart"><svg width="100%" height="116" viewBox="0 0 560 116" preserveAspectRatio="none"><polyline points="0,84 70,64 140,78 210,54 280,70 350,44 420,60 490,34 560,52" stroke="#8A909C" stroke-width="2" fill="none"/><polyline points="0,98 70,90 140,94 210,86 280,92 350,84 420,88 490,80 560,86" stroke="#cfcabf" stroke-width="2" fill="none" stroke-dasharray="4 4"/></svg></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 05 WEEKLY SETUP -->
+  <figure class="cell">
+    <figcaption><span class="no">05</span> Weekly pulse setup <span class="tag key">First action · return hook</span></figcaption>
+    <div class="frame" aria-label="05 Weekly setup">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"></div></div>
+      <div class="stage">
+        <div class="eyebrow">Your weekly pulse</div>
+        <h2>Get your pulse every Monday.</h2>
+        <p class="lede">A short read on the one thing that changed — in plain English, no dashboard required.</p>
+        <div class="field"><div class="lab"><b>Send it to</b><small>Where your pulse arrives</small></div><div class="seg"><span class="on">Email</span><span>Shopify inbox</span></div></div>
+        <div class="field"><div class="lab"><b>Day</b><small>Start of your week</small></div><div class="seg"><span class="on">Mon</span><span>Fri</span><span>Sun</span></div></div>
+        <div class="field"><div class="lab"><b>Alert me sooner</b><small>If repeat rate drops another 5%</small></div><span class="toggle on"></span></div>
+        <div class="btn-row" style="margin-top:6px"><span class="btn btn-primary">Turn on weekly pulse</span><span class="link mut">Skip for now</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 05b CONFIRMED -->
+  <figure class="cell">
+    <figcaption><span class="no">05b</span> Weekly pulse — confirmed</figcaption>
+    <div class="frame" aria-label="05b Weekly confirmed">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"></div></div>
+      <div class="stage">
+        <div class="eyebrow">Your weekly pulse</div>
+        <h2>You're all set.</h2>
+        <div class="confirm"><span class="c"></span><span><b>Weekly pulse is on.</b> Next pulse: Monday, to your email.</span></div>
+        <p class="lede">We'll only reach out when there's something worth knowing. You can change the day or turn it off from Settings anytime.</p>
+        <div class="btn-row"><span class="btn btn-primary">Explore your dashboard →</span><span class="link">Preview a return visit</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 06 RETURN -->
+  <figure class="cell">
+    <figcaption><span class="no">06</span> Since you were away <span class="tag key">Return visit</span></figcaption>
+    <div class="frame" aria-label="06 Return visit">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"></div></div>
+      <div class="stage">
+        <p class="hi">Welcome back, Maya 👋</p>
+        <div class="eyebrow">Since you were away · 7 days</div>
+        <div class="pulse">
+          <p class="say">Good news — repeat customers ticked <span class="hl" style="background:linear-gradient(180deg,transparent 62%,var(--pine-tint) 62%)"><span style="color:var(--pine);font-weight:600">back up 4%.</span></span></p>
+          <div class="spark">
+            <svg width="180" height="52" viewBox="0 0 180 52" fill="none"><polyline points="2,40 24,42 46,38 68,40 90,34 112,30 134,26 158,20 178,16" stroke="#2F6F5E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="178" cy="16" r="3.5" fill="#2F6F5E"/></svg>
+            <span class="cap">You sent 2 campaigns and restocked Cedar Candle. Both moved the needle.</span>
+          </div>
+        </div>
+        <ul class="changes">
+          <li><span class="name">Repeat purchase rate</span><span class="val up">▲ 4.0%</span></li>
+          <li><span class="name">Cedar Candle — back in stock</span><span class="val up">▲ 62 sold</span></li>
+          <li><span class="name">Checkout drop-off</span><span class="val dn">▼ still 41%</span></li>
+        </ul>
+        <div class="btn-row"><span class="btn btn-primary">See what changed →</span></div>
+      </div>
+    </div>
+  </figure>
+
+  <!-- 07 DASHBOARD -->
+  <figure class="cell">
+    <figcaption><span class="no">07</span> Dashboard — framed around the goal</figcaption>
+    <div class="frame" aria-label="07 Dashboard framed">
+      <div class="appbar"><div class="brand"><span class="logo"></span>StoreLens</div><div class="steps"></div></div>
+      <div class="stage">
+        <div class="eyebrow mut">Your dashboard · framed around your goal</div>
+        <p class="dash-q">Are your customers coming back?</p>
+        <p class="dash-lead">Everything below answers the question you picked. The rest of your analytics is one click away — but it's not shouting at you.</p>
+        <div class="panel pinned" style="margin-bottom:14px"><div class="h">Pinned · your pulse</div><div style="font-family:var(--serif);font-size:19px;font-weight:500">Repeat rate is 17% — <span style="color:var(--pine)">recovering, but below your best of 21%.</span></div></div>
+        <div class="grid2">
+          <div class="panel"><div class="h">Repeat rate · 12 weeks</div><svg width="100%" height="80" viewBox="0 0 320 80" preserveAspectRatio="none"><polyline points="0,26 40,24 80,32 120,36 160,48 200,54 240,48 280,40 320,32" stroke="#2F6F5E" stroke-width="2.5" fill="none"/></svg><div class="bench">Your category typically sees <b>15–22%</b>. You're in range.</div></div>
+          <div class="panel"><div class="h">Conversion rate</div><div style="font-size:28px;font-weight:700;letter-spacing:-.02em">2.1%</div><div class="bench">Typical for home goods is <b>1.8–2.6%</b> — you're fine.</div></div>
+        </div>
+        <div class="panel"><div class="h">Who's coming back</div><div style="font-size:14px;color:var(--ink-2)">Top returning product: <b style="color:var(--ink)">Cedar Candle</b> · 62 repeat buyers this month · <span style="color:var(--pine)">most loyal cohort: April email subscribers.</span></div></div>
+      </div>
+    </div>
+  </figure>
+
+</div>
